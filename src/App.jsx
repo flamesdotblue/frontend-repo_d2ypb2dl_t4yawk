@@ -1,28 +1,38 @@
-import { useState } from 'react'
+import React from 'react';
+import Header from './components/Header';
+import RoleOverview from './components/RoleOverview';
+import Responsibilities from './components/Responsibilities';
+import QandA from './components/QandA';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-indigo-50 to-fuchsia-50 text-gray-900">
+      {/* Print-specific styles to force page breaks */}
+      <style>
+        {`
+          @media print {
+            /* Remove background gradients for clean PDF */
+            body { background: white !important; }
+            .print-page { page-break-after: always; }
+          }
+        `}
+      </style>
+
+      <Header />
+
+      <main className="px-4">
+        <RoleOverview />
+        <Responsibilities />
+        <div className="print-page">
+          <QandA />
         </div>
-      </div>
+      </main>
+
+      <footer className="print:hidden text-center text-sm text-gray-600 py-8">
+        Built with modern web standards. Use the Download button to export a PDF.
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
